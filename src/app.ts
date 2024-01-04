@@ -97,28 +97,6 @@ app.use('/api/v1', authHandler, orderRoute);
 // admin
 app.use('/api/v1/admin', authHandler, adminRouter);
 
-app.get('/sse', (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-
-  res.write('data: Initial data\n\n');
-
-  const intervalId = setInterval(() => {
-    const eventData = `data: Server time is ${new Date().toLocaleTimeString()}\n\n`;
-    res.write(eventData);
-  }, 1000);
-
-  setTimeout(() => {
-    clearInterval(intervalId);
-    res.end();
-  }, 10000);
-
-  req.on('close', () => {
-    clearInterval(intervalId);
-  });
-});
-
 app.use(errorHandler);
 
 if (env !== 'test') {
