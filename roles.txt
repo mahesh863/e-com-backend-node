@@ -1,0 +1,5 @@
+customer : 1
+
+admin: 10 read
+admin: 11: create, update, read
+admin: 12: create, update, read, delete, (product , category, company) approval, addNewAdmin
